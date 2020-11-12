@@ -1,4 +1,5 @@
 const path = require(`path`)
+const _ = require("lodash")
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
@@ -6,6 +7,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const modulePage = path.resolve(`./src/templates/module.js`)
 
   // Get all markdown blog posts sorted by date
   const result = await graphql(
@@ -17,6 +19,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         ) {
           nodes {
             id
+            frontmatter {
+              title
+            }
             fields {
               slug
             }
@@ -40,22 +45,107 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
 
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+  // const createPost = ({ post, previousId, nextId }) => {
+  //   createPage({
+  //     path: post.fields.slug,
+  //     component: blogPost,
+  //     context: {
+  //       id: post.id,
+  //       previousId,
+  //       nextId,
+  //     },
+  //   })
+  // }
+  //
+  // // group by top level modules, group those on the next level, etc.
+  // // we must recurse down. Then, for each we will create a page with links unless it's the bottom level
+  // const createNextLevelOfPosts = (groups, level, skipCreateOnLevel) => {
+  //   // how to determine base case? It's when the level is the furthest along the slug
+  //   const pagesCreatedOnLevel = []
+  //
+  //   Object.entries(groups).forEach(([groupName, elements]) => {
+  //     // check all elements of this group. If the level passed in here is equal to length, then create
+  //     // posts
+  //     const postLevel = elements.some(
+  //       post => post.fields.slug.split("/").length - 2 === level
+  //     )
+  //     if (postLevel) {
+  //       elements.forEach(post => {
+  //         pagesCreatedOnLevel.push({
+  //           title: post.frontmatter.title,
+  //           slug: post.fields.slug,
+  //         })
+  //         createPost({ post })
+  //       })
+  //
+  //       return
+  //     }
+  //
+  //     const newGroups = _.groupBy(
+  //       elements,
+  //       post => post.fields.slug.split("/")[level + 1]
+  //     )
+  //
+  //     Object.entries(newGroups).forEach(([group, elements]) => {
+  //       pagesCreatedOnLevel.push({
+  //         title: group,
+  //         slug:
+  //           elements[0].fields.slug
+  //             .split("/")
+  //             .slice(0, level + 1)
+  //             .join("/") + "/",
+  //       })
+  //     })
+  //
+  //     createNextLevelOfPosts(newGroups, level + 1)
+  //   })
+  //   if (level > 2) {
+  //     const slug =
+  //       Object.values(groups)[0][0]
+  //         .fields.slug.split("/")
+  //         .slice(0, level)
+  //         .join("/") + "/"
+  //
+  //     createPage({
+  //       path: slug,
+  //       component: modulePage,
+  //       context: {
+  //         pages: pagesCreatedOnLevel,
+  //       },
+  //     })
+  //     console.log(
+  //       `Creating a page at route ${slug} with links to pages ${pagesCreatedOnLevel.map(
+  //         page => page.slug
+  //       )}`
+  //     )
+  //   }
+  // }
+  //
+  // console.log(posts)
+  // const initialGroups = _.groupBy(posts, post => post.fields.slug.split("/")[1])
+  // console.log(initialGroups)
+  // createNextLevelOfPosts(initialGroups, 1, true)
 
-      createPage({
-        path: post.fields.slug,
-        component: blogPost,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
-    })
-  }
+  // create page that points to all it's subpages. But how do we know if it should point
+  // to modules or pages? I guess it should get back from the return value which links to create...
+
+  // if (posts.length > 0) {
+  //   posts.forEach((post, index) => {
+  //     const previousPostId = index === 0 ? null : posts[index - 1].id
+  //     const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+  //
+  //     console.log(post.fields)
+  //     createPage({
+  //       path: post.fields.slug,
+  //       component: blogPost,
+  //       context: {
+  //         id: post.id,
+  //         previousPostId,
+  //         nextPostId,
+  //       },
+  //     })
+  //   })
+  // }
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
