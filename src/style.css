@@ -1,5 +1,9 @@
 /* CSS Custom Properties Definitions */
 
+a {
+  text-decoration: none;
+}
+
 :root {
   --maxWidth-none: "none";
   --maxWidth-xs: 20rem;
@@ -270,6 +274,11 @@ a:focus {
 
 .post-list-item h2 {
   font-size: var(--fontSize-4);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-2);
+  margin-top: var(--spacing-0);
+}
+.post-list-item h5 {
   color: var(--color-primary);
   margin-bottom: var(--spacing-2);
   margin-top: var(--spacing-0);

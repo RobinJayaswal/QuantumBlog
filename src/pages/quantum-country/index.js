@@ -3,6 +3,18 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
+import LinkList from "../../components/linkList"
+
+const ESSAYS = [
+  {
+    path: "/quantum-country/qcfvc",
+    title: "Quantum Computing for the Very Curious",
+  },
+  {
+    path: "/quantum-country/2-how-the-quantum-search-algorithm-works",
+    title: "How the Quantum Search Algorithm Works",
+  },
+]
 
 const QuantumCountry = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -30,18 +42,8 @@ const QuantumCountry = ({ data, location }) => {
         important applications: the quantum search algorithm and quantum
         teleportation.
       </blockquote>
-      <h3>Modules</h3>
-      <p>
-        <Link to="/quantum-country/qcfvc" itemProp="url">
-          <span itemProp>Quantum Computing for the Very Curious</span>
-        </Link>
-      </p>
-      <Link
-        to="/quantum-country/2-how-the-quantum-search-algorithm-works"
-        itemProp="url"
-      >
-        <span itemProp>How the Quantum Search Algorithm Works</span>
-      </Link>
+      <h3>Exercises</h3>
+      <LinkList items={ESSAYS} />
     </Layout>
   )
 }
