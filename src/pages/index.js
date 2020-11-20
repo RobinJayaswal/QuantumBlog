@@ -9,7 +9,7 @@ const LEARN_MODULES = [
   {
     title: "Quantum Country",
     description:
-      "Introductory essays with built in flashcards. Written by Michael Nielsen, author of canonical textbook in the field.",
+      "Introductory essays with a built in spaced repitition system. Written by Michael Nielsen and Andy Matuschak.",
     path: "/quantum-country",
   },
 ]
@@ -55,15 +55,3 @@ export const pageQuery = graphql`
     }
   }
 `
-/**
- *           <p>
-            <Link to="/quantum-country" itemProp="url">
-              <span itemProp>Quantum Country</span>
-            </Link>
-            {"—"}
-            Introductory essays with built in flashcards. Written by Michael
-            Nielsen, author of canonical textbook in the field. A great starting
-            point for beginners.
-          </p>
-
- */

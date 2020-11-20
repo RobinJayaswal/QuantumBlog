@@ -42,7 +42,7 @@ const QuantumCountry = ({ data, location }) => {
         important applications: the quantum search algorithm and quantum
         teleportation.
       </blockquote>
-      <h3>Exercises</h3>
+      <h3>Exercises by Essay</h3>
       <LinkList items={ESSAYS} />
     </Layout>
   )

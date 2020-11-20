@@ -49,6 +49,16 @@ const EXERCISES = [
     title: "Exercise: Show that M|e_k⟩ is the kth column of the matrix M",
     link: "https://www.notion.so/Exercise-10-d18ffa5478d0402993bb03b172314072",
   },
+  {
+    title:
+      "Exercise: Can you find single-qubit states so that applying a CNOT to the combined state changes the first qubit, i.e., the control qubit?",
+    link: "https://www.notion.so/Exercise-11-745e508866ad41cf86c1d2d58544cf95",
+  },
+  {
+    title:
+      "Exercise: Show that the inverse of the CNOT gate is just the CNOT gate.",
+    link: "https://www.notion.so/Exercise-12-f3c3dcfcd625487e85b320bb07502300",
+  },
 ]
 
 const QuantumCountry = ({ data, location }) => {
@@ -61,7 +71,15 @@ const QuantumCountry = ({ data, location }) => {
       <a href="https://quantum.country/qcvc">https://quantum.country/qcvc</a>
       <h3>Exercises</h3>
       {EXERCISES.map(exercise => (
-        <p>
+        <p
+          style={{
+            paddingTop: 25,
+            marginBottom: 0,
+            marginTop: 0,
+            paddingBottom: 25,
+            borderBottom: "solid #BFD3D3D3 thin",
+          }}
+        >
           <a href={exercise.link} target="_blank">
             {exercise.title}
           </a>
