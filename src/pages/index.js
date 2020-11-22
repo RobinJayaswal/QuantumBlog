@@ -20,10 +20,14 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="Quantum Wiki" />
+      <SEO title="Exercise Solutions for Quantum Computing Resources" />
       <p>
-        Resources to learn about quantum computing, along with exercise
-        solutions.
+        List of resources to learn about quantum computing, along with exercise
+        solutions. If you are looking for a guide, the resources below are
+        ordered in such a way that they provide a reasonable approach for a
+        beginner. The <em>Quantum Country</em> essays are very beginner
+        friendly, and you can work your way up to the canonical textbook{" "}
+        <em>Quantum Computation and Quantum Information</em>.
       </p>
       <h2>Learn</h2>
       <LinkList items={LEARN_MODULES} />

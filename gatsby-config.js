@@ -1,7 +1,7 @@
 module.exports = {
   pathPrefix: "/QuantumBlog",
   siteMetadata: {
-    title: `Quantum Wiki`,
+    title: `Quantum Exercise Solutions`,
     author: {
       name: `Robin Jayaswal`,
     },
